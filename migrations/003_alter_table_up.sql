@@ -1,0 +1,1 @@
+ALTER TABLE clientes ADD COLUMN endereco VARCHAR(250) NOT NULL;
