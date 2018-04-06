@@ -17,7 +17,23 @@ cd tadpgweb
 docker-compose up tad
 ```
 
-e num outro terminal rode o `pgweb`:
+## Preparando o banco
+
+Num outro terminal vamos copiar os arquivos de migração para dentro da pasta do postgres:
+
+```console
+sudo cp migrations/*up.sql data/postgres/
+```
+
+E depois para aplicar as migrações no banco:
+```console
+docker-compose exec tad psql -U postgres -d tadpgweb -1 -f /var/lib/postgresql/data/001_create_table_up.sql
+docker-compose exec tad psql -U postgres -d tadpgweb -1 -f /var/lib/postgresql/data/002_alter_table_up.sql
+docker-compose exec tad psql -U postgres -d tadpgweb -1 -f /var/lib/postgresql/data/003_alter_table_up.sql
+docker-compose exec tad psql -U postgres -d tadpgweb -1 -f /var/lib/postgresql/data/004_data_migration_up.sql
+```
+
+E finalmente rode o `pgweb`:
 
 ```console
 pgweb
